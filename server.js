@@ -8,7 +8,7 @@ app.use(express.static(join(__dirname, "client")));
 app.use(express.urlencoded({ extended: false }));
 
 app.get('/', function (req, res) {
-    res.end("index.html");
+    res.end("static/index.html");
 });
 
 app.listen(port, () => console.log("Listening on port " + port));
