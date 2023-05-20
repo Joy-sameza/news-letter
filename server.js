@@ -1,14 +1,17 @@
-const port = parseInt(process.env.PORT) || 3000;
 const { join } = require("path");
 const express = require("express"),
   app = express();
+
+// Database connection
+require("./config/connectDatabse")("mongodb://127.0.0.1:27017/NewLetter");
 
 //Middlewares
 app.use(express.static(join(__dirname, "client")));
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/', function (req, res) {
-    res.end("static/index.html");
-});
+// view engine setup
+app.set("views", join(__dirname, "views"));
+app.set("view engine", "ejs");
 
-app.listen(port, () => console.log("Listening on port " + port));
+//Route middlewares
+app.get("/", (_req, res) => res.render("index"));
